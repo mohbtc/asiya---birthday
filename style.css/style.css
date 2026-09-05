@@ -5,12 +5,13 @@
 }
 
 :root {
-  --bg: #07020d;
-  --bg-soft: #10051a;
+  --bg: #06020b;
+  --surface: rgba(255, 255, 255, 0.055);
+  --border: rgba(255, 255, 255, 0.11);
   --purple: #a855f7;
-  --purple-light: #d8b4fe;
+  --purple-light: #e9d5ff;
+  --muted: #b7a8c5;
   --white: #ffffff;
-  --muted: #c8b9d4;
 }
 
 html {
@@ -21,16 +22,16 @@ body {
   min-height: 100vh;
   background:
     radial-gradient(
-      circle at 50% 20%,
-      rgba(168, 85, 247, 0.18),
+      circle at 50% 0%,
+      rgba(168, 85, 247, 0.2),
       transparent 35%
     ),
-    radial-gradient(
-      circle at 10% 80%,
-      rgba(124, 58, 237, 0.12),
-      transparent 30%
-    ),
-    var(--bg);
+    linear-gradient(
+      180deg,
+      #06020b 0%,
+      #0b0313 50%,
+      #06020b 100%
+    );
 
   color: var(--white);
   font-family:
@@ -44,14 +45,52 @@ body {
 
 
 /* =========================
-   HERO
+   AMBIENT LIGHT
 ========================= */
 
-.hero {
-  min-height: 100vh;
+.ambient {
+  position: fixed;
+
+  width: 320px;
+  height: 320px;
+
+  border-radius: 50%;
+
+  background: rgba(168, 85, 247, 0.12);
+
+  filter: blur(120px);
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  animation: ambientFloat 8s ease-in-out infinite;
+}
+
+.ambient-one {
+  top: 5%;
+  left: -160px;
+}
+
+.ambient-two {
+  bottom: 5%;
+  right: -160px;
+
+  animation-delay: -4s;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.intro {
+  min-height: 100svh;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   text-align: center;
@@ -59,70 +98,26 @@ body {
   padding: 30px;
 
   position: relative;
-  overflow: hidden;
+
+  z-index: 1;
 }
 
-.hero::before,
-.hero::after {
-  content: "";
+.intro-content {
+  max-width: 720px;
 
-  position: absolute;
-
-  width: 280px;
-  height: 280px;
-
-  border-radius: 50%;
-
-  background: rgba(168, 85, 247, 0.16);
-
-  filter: blur(100px);
-
-  animation: float 7s ease-in-out infinite;
+  animation: introReveal 1.4s ease forwards;
 }
 
-.hero::before {
-  top: 10%;
-  left: -120px;
-}
+.eyebrow {
+  display: block;
 
-.hero::after {
-  bottom: 5%;
-  right: -120px;
-
-  animation-delay: -3s;
-}
-
-.glow {
-  position: absolute;
-
-  width: 350px;
-  height: 350px;
-
-  border-radius: 50%;
-
-  background: rgba(168, 85, 247, 0.22);
-
-  filter: blur(130px);
-
-  animation: pulseGlow 5s ease-in-out infinite;
-}
-
-.content {
-  position: relative;
-
-  z-index: 2;
-
-  max-width: 700px;
-
-  animation: fadeUp 1.5s ease forwards;
-}
-
-.small {
   margin-bottom: 25px;
 
   color: var(--purple-light);
 
-  font-size: 11px;
+  font-size: 10px;
+
+  font-weight: 600;
 
   letter-spacing: 5px;
 
@@ -130,42 +125,47 @@ body {
 }
 
 h1 {
-  margin-bottom: 28px;
+  font-size: clamp(58px, 17vw, 110px);
 
-  font-size: clamp(52px, 15vw, 100px);
+  line-height: 0.87;
 
-  line-height: 0.9;
+  letter-spacing: -5px;
 
-  letter-spacing: -4px;
+  margin-bottom: 30px;
 
   background:
     linear-gradient(
       135deg,
-      #ffffff 20%,
-      #e9d5ff 50%,
-      #a855f7 80%
+      #ffffff 10%,
+      #ead7ff 45%,
+      #a855f7 85%
     );
 
   -webkit-background-clip: text;
+
   -webkit-text-fill-color: transparent;
 }
 
-.subtitle {
-  max-width: 500px;
+h1 span {
+  display: block;
+}
+
+.intro-text {
+  max-width: 480px;
 
   margin: 0 auto 38px;
 
   color: var(--muted);
 
-  font-size: 17px;
+  font-size: 16px;
 
   line-height: 1.8;
 }
 
-button {
+#surpriseButton {
   border: 1px solid rgba(255, 255, 255, 0.15);
 
-  padding: 17px 30px;
+  padding: 17px 27px;
 
   border-radius: 999px;
 
@@ -178,80 +178,135 @@ button {
 
   color: white;
 
-  font-size: 15px;
+  font-size: 14px;
 
   font-weight: 700;
 
   cursor: pointer;
 
   box-shadow:
-    0 10px 50px rgba(168, 85, 247, 0.35);
+    0 15px 55px rgba(168, 85, 247, 0.35);
 
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
 
-button:hover {
-  transform: translateY(-4px) scale(1.03);
+#surpriseButton span {
+  margin-left: 7px;
+}
+
+#surpriseButton:hover {
+  transform: translateY(-4px);
 
   box-shadow:
-    0 18px 60px rgba(168, 85, 247, 0.55);
+    0 20px 70px rgba(168, 85, 247, 0.5);
+}
+
+.scroll-hint {
+  position: absolute;
+
+  bottom: 35px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 22px;
+
+  height: 35px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  border-radius: 20px;
+
+  opacity: 0.5;
+}
+
+.scroll-hint span {
+  display: block;
+
+  width: 3px;
+
+  height: 6px;
+
+  margin: 7px auto;
+
+  border-radius: 5px;
+
+  background: white;
+
+  animation: scrollDot 1.7s infinite;
 }
 
 
 /* =========================
-   BIRTHDAY SECTION
+   SURPRISE
 ========================= */
 
-.birthday {
-  display: none;
-
+.surprise {
   min-height: 100vh;
 
-  padding: 100px 25px;
-
-  text-align: center;
+  padding:
+    110px
+    25px
+    140px;
 
   position: relative;
 
-  background:
-    linear-gradient(
-      180deg,
-      #07020d,
-      #0e0416
-    );
+  z-index: 1;
 }
 
-.birthday.show {
-  display: block;
+.section-label {
+  max-width: 900px;
 
-  animation: fadeUp 1s ease forwards;
+  margin: 0 auto 70px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  letter-spacing: 4px;
+
+  text-transform: uppercase;
 }
 
-.birthday::before {
-  content: "";
+.section-label span {
+  color: var(--purple-light);
 
-  position: absolute;
+  margin-right: 12px;
+}
 
-  top: 0;
-  left: 50%;
+.reveal-heading {
+  max-width: 900px;
 
-  width: 500px;
-  height: 300px;
+  margin: 0 auto 55px;
+}
 
-  transform: translateX(-50%);
+.reveal-heading p {
+  margin-bottom: 15px;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(168, 85, 247, 0.18),
-      transparent 70%
-    );
+  color: var(--purple-light);
 
-  filter: blur(30px);
+  font-size: 13px;
 
-  pointer-events: none;
+  letter-spacing: 1px;
+}
+
+.reveal-heading h2 {
+  max-width: 700px;
+
+  font-size: clamp(38px, 8vw, 70px);
+
+  line-height: 0.98;
+
+  letter-spacing: -3px;
+}
+
+.reveal-heading h2 span,
+.message-card h2 span,
+.final-message h2 span {
+  color: var(--purple-light);
 }
 
 
@@ -259,43 +314,126 @@ button:hover {
    VIDEO
 ========================= */
 
+.video-card {
+  max-width: 900px;
+
+  margin: 0 auto 120px;
+
+  position: relative;
+}
+
+.video-glow {
+  position: absolute;
+
+  inset: 15%;
+
+  background: rgba(168, 85, 247, 0.2);
+
+  filter: blur(70px);
+
+  z-index: -1;
+}
+
+.video-wrapper {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  border: 1px solid var(--border);
+
+  background: #000;
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.6);
+}
+
 .birthday-video {
   display: block;
 
   width: 100%;
 
-  max-width: 680px;
+  max-height: 75vh;
 
-  margin: 0 auto 55px;
-
-  border-radius: 28px;
-
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  object-fit: contain;
 
   background: #000;
-
-  box-shadow:
-    0 25px 80px rgba(0, 0, 0, 0.55),
-    0 0 60px rgba(168, 85, 247, 0.18);
 }
 
+.video-overlay {
+  position: absolute;
 
-/* =========================
-   HEART
-========================= */
+  inset: 0;
 
-.heart {
-  font-size: 64px;
+  display: flex;
 
-  margin-bottom: 25px;
+  flex-direction: column;
 
-  filter:
-    drop-shadow(
-      0 0 25px rgba(168, 85, 247, 0.65)
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.55)
     );
 
-  animation:
-    heartbeat 1.6s ease-in-out infinite;
+  transition: opacity 0.4s ease;
+
+  pointer-events: none;
+}
+
+.video-overlay.hidden {
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.play-button {
+  width: 72px;
+
+  height: 72px;
+
+  padding: 0;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  background:
+    rgba(168, 85, 247, 0.85);
+
+  color: white;
+
+  font-size: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  pointer-events: auto;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 50px rgba(168, 85, 247, 0.5);
+}
+
+.video-overlay p {
+  margin-top: 15px;
+
+  color: white;
+
+  font-size: 11px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
 }
 
 
@@ -303,26 +441,120 @@ button:hover {
    MESSAGE
 ========================= */
 
-.birthday h2 {
+.message-card {
+  max-width: 720px;
+
+  margin: 0 auto 160px;
+
+  padding: 60px 35px;
+
+  text-align: center;
+
+  border-radius: 30px;
+
+  border: 1px solid var(--border);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.3);
+}
+
+.heart {
+  font-size: 55px;
+
   margin-bottom: 25px;
 
-  font-size: clamp(38px, 9vw, 64px);
+  filter:
+    drop-shadow(
+      0 0 25px rgba(168, 85, 247, 0.6)
+    );
+
+  animation: heartbeat 1.7s infinite;
+}
+
+.message-label {
+  color: var(--purple-light) !important;
+
+  font-size: 10px !important;
+
+  letter-spacing: 4px;
+
+  margin-bottom: 20px !important;
+}
+
+.message-card h2 {
+  margin-bottom: 30px;
+
+  font-size: clamp(38px, 8vw, 60px);
 
   line-height: 1;
 
   letter-spacing: -2px;
 }
 
-.birthday p {
-  max-width: 650px;
+.message {
+  max-width: 600px;
 
-  margin: auto;
+  margin: 0 auto 20px;
 
   color: var(--muted);
 
-  font-size: 17px;
+  font-size: 16px;
 
-  line-height: 2;
+  line-height: 1.9;
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final-message {
+  max-width: 800px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.final-message > span {
+  color: var(--purple-light);
+
+  font-size: 10px;
+
+  letter-spacing: 4px;
+}
+
+.final-message h2 {
+  margin: 25px 0;
+
+  font-size: clamp(42px, 9vw, 78px);
+
+  line-height: 0.95;
+
+  letter-spacing: -3px;
+}
+
+.final-message p {
+  color: var(--muted);
+
+  font-size: 16px;
+}
+
+.final-heart {
+  margin-top: 45px;
+
+  color: var(--purple-light);
+
+  font-size: 25px;
+
+  animation: heartbeat 2s infinite;
 }
 
 
@@ -330,12 +562,12 @@ button:hover {
    ANIMATIONS
 ========================= */
 
-@keyframes fadeUp {
+@keyframes introReveal {
   from {
     opacity: 0;
 
     transform:
-      translateY(40px);
+      translateY(35px);
   }
 
   to {
@@ -353,33 +585,36 @@ button:hover {
   }
 
   50% {
-    transform: scale(1.15);
+    transform: scale(1.14);
   }
 }
 
-@keyframes pulseGlow {
-  0%,
-  100% {
-    transform: scale(0.9);
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
 
-    opacity: 0.6;
+    opacity: 0;
   }
 
-  50% {
-    transform: scale(1.1);
-
+  30% {
     opacity: 1;
   }
+
+  100% {
+    transform: translateY(12px);
+
+    opacity: 0;
+  }
 }
 
-@keyframes float {
+@keyframes ambientFloat {
   0%,
   100% {
     transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-35px);
+    transform: translateY(-40px);
   }
 }
 
@@ -390,49 +625,56 @@ button:hover {
 
 @media (max-width: 600px) {
 
-  .hero {
+  .intro {
     padding: 25px;
   }
 
-  .small {
-    font-size: 9px;
-
-    letter-spacing: 3px;
-  }
-
   h1 {
-    font-size: clamp(48px, 16vw, 72px);
+    font-size: clamp(54px, 17vw, 75px);
 
     letter-spacing: -3px;
   }
 
-  .subtitle {
+  .intro-text {
     font-size: 15px;
-
-    line-height: 1.7;
   }
 
-  button {
-    padding: 16px 25px;
+  .surprise {
+    padding:
+      80px
+      20px
+      100px;
   }
 
-  .birthday {
-    padding: 80px 20px;
+  .section-label {
+    margin-bottom: 50px;
   }
 
-  .birthday-video {
+  .reveal-heading {
+    margin-bottom: 40px;
+  }
+
+  .reveal-heading h2 {
+    letter-spacing: -2px;
+  }
+
+  .video-wrapper {
     border-radius: 20px;
-
-    margin-bottom: 45px;
   }
 
-  .birthday h2 {
-    font-size: 38px;
+  .message-card {
+    padding: 45px 22px;
+
+    border-radius: 24px;
+
+    margin-bottom: 110px;
   }
 
-  .birthday p {
+  .message {
     font-size: 15px;
+  }
 
-    line-height: 1.9;
+  .final-message h2 {
+    letter-spacing: -2px;
   }
 }

@@ -1,0 +1,208 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #08030d;
+  --purple: #9b4dff;
+  --light-purple: #d7b5ff;
+  --text: #ffffff;
+  --muted: #b9a9c8;
+  --card: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+section {
+  position: relative;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(155, 77, 255, 0.18), transparent 35%),
+    var(--bg);
+}
+
+.glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: var(--purple);
+  filter: blur(130px);
+  opacity: 0.2;
+  border-radius: 50%;
+  animation: floatGlow 6s ease-in-out infinite;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+  animation: fadeUp 1.4s ease forwards;
+}
+
+.small {
+  font-size: 12px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--light-purple);
+  margin-bottom: 22px;
+}
+
+h1 {
+  font-size: clamp(48px, 13vw, 90px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+  margin-bottom: 25px;
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #c88cff,
+    #ffffff
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  max-width: 480px;
+  margin: 0 auto 35px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+button {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 16px 28px;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    #a653ff,
+    #7131c9
+  );
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 10px 40px rgba(155, 77, 255, 0.25);
+  transition: transform 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 15px 50px rgba(155, 77, 255, 0.4);
+}
+
+.birthday {
+  display: none;
+  padding: 100px 25px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(155, 77, 255, 0.12),
+      transparent 35%
+    );
+}
+
+.birthday.show {
+  display: block;
+  animation: fadeUp 1s ease forwards;
+}
+
+.birthday h2 {
+  font-size: clamp(34px, 9vw, 58px);
+  margin-bottom: 25px;
+}
+
+.birthday p {
+  max-width: 650px;
+  margin: auto;
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 17px;
+}
+
+.heart {
+  font-size: 60px;
+  margin-bottom: 25px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+@media (max-width: 600px) {
+  .small {
+    letter-spacing: 3px;
+    font-size: 10px;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  button {
+    padding: 15px 24px;
+  }
+}

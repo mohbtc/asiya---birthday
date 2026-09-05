@@ -5,13 +5,12 @@
 }
 
 :root {
-  --bg: #08030d;
-  --purple: #9b4dff;
-  --light-purple: #d7b5ff;
-  --text: #ffffff;
-  --muted: #b9a9c8;
-  --card: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.1);
+  --bg: #07020d;
+  --bg-soft: #10051a;
+  --purple: #a855f7;
+  --purple-light: #d8b4fe;
+  --white: #ffffff;
+  --muted: #c8b9d4;
 }
 
 html {
@@ -19,157 +18,337 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(168, 85, 247, 0.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(124, 58, 237, 0.12),
+      transparent 30%
+    ),
+    var(--bg);
+
+  color: var(--white);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   overflow-x: hidden;
 }
 
-section {
-  position: relative;
-  min-height: 100vh;
-}
 
-button {
-  font-family: inherit;
-}
+/* =========================
+   HERO
+========================= */
 
 .hero {
+  min-height: 100vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   text-align: center;
+
   padding: 30px;
+
+  position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(155, 77, 255, 0.18), transparent 35%),
-    var(--bg);
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 50%;
+
+  background: rgba(168, 85, 247, 0.16);
+
+  filter: blur(100px);
+
+  animation: float 7s ease-in-out infinite;
+}
+
+.hero::before {
+  top: 10%;
+  left: -120px;
+}
+
+.hero::after {
+  bottom: 5%;
+  right: -120px;
+
+  animation-delay: -3s;
 }
 
 .glow {
   position: absolute;
-  width: 320px;
-  height: 320px;
-  background: var(--purple);
-  filter: blur(130px);
-  opacity: 0.2;
+
+  width: 350px;
+  height: 350px;
+
   border-radius: 50%;
-  animation: floatGlow 6s ease-in-out infinite;
+
+  background: rgba(168, 85, 247, 0.22);
+
+  filter: blur(130px);
+
+  animation: pulseGlow 5s ease-in-out infinite;
 }
 
 .content {
   position: relative;
+
   z-index: 2;
-  max-width: 650px;
-  animation: fadeUp 1.4s ease forwards;
+
+  max-width: 700px;
+
+  animation: fadeUp 1.5s ease forwards;
 }
 
 .small {
-  font-size: 12px;
+  margin-bottom: 25px;
+
+  color: var(--purple-light);
+
+  font-size: 11px;
+
   letter-spacing: 5px;
+
   text-transform: uppercase;
-  color: var(--light-purple);
-  margin-bottom: 22px;
 }
 
 h1 {
-  font-size: clamp(48px, 13vw, 90px);
-  line-height: 0.95;
-  letter-spacing: -3px;
-  margin-bottom: 25px;
-  background: linear-gradient(
-    90deg,
-    #ffffff,
-    #c88cff,
-    #ffffff
-  );
+  margin-bottom: 28px;
+
+  font-size: clamp(52px, 15vw, 100px);
+
+  line-height: 0.9;
+
+  letter-spacing: -4px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 20%,
+      #e9d5ff 50%,
+      #a855f7 80%
+    );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-  max-width: 480px;
-  margin: 0 auto 35px;
+  max-width: 500px;
+
+  margin: 0 auto 38px;
+
   color: var(--muted);
+
   font-size: 17px;
-  line-height: 1.7;
+
+  line-height: 1.8;
 }
 
 button {
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 16px 28px;
+
+  padding: 17px 30px;
+
   border-radius: 999px;
-  background: linear-gradient(
-    135deg,
-    #a653ff,
-    #7131c9
-  );
+
+  background:
+    linear-gradient(
+      135deg,
+      #b45cff,
+      #7c3aed
+    );
+
   color: white;
+
   font-size: 15px;
-  font-weight: 600;
+
+  font-weight: 700;
+
   cursor: pointer;
+
   box-shadow:
-    0 10px 40px rgba(155, 77, 255, 0.25);
-  transition: transform 0.3s ease,
-              box-shadow 0.3s ease;
+    0 10px 50px rgba(168, 85, 247, 0.35);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 button:hover {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-4px) scale(1.03);
+
   box-shadow:
-    0 15px 50px rgba(155, 77, 255, 0.4);
+    0 18px 60px rgba(168, 85, 247, 0.55);
 }
+
+
+/* =========================
+   BIRTHDAY SECTION
+========================= */
 
 .birthday {
   display: none;
+
+  min-height: 100vh;
+
   padding: 100px 25px;
+
   text-align: center;
+
+  position: relative;
+
   background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(155, 77, 255, 0.12),
-      transparent 35%
+    linear-gradient(
+      180deg,
+      #07020d,
+      #0e0416
     );
 }
 
 .birthday.show {
   display: block;
+
   animation: fadeUp 1s ease forwards;
 }
 
-.birthday h2 {
-  font-size: clamp(34px, 9vw, 58px);
+.birthday::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 500px;
+  height: 300px;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(168, 85, 247, 0.18),
+      transparent 70%
+    );
+
+  filter: blur(30px);
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   VIDEO
+========================= */
+
+.birthday-video {
+  display: block;
+
+  width: 100%;
+
+  max-width: 680px;
+
+  margin: 0 auto 55px;
+
+  border-radius: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: #000;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(168, 85, 247, 0.18);
+}
+
+
+/* =========================
+   HEART
+========================= */
+
+.heart {
+  font-size: 64px;
+
   margin-bottom: 25px;
+
+  filter:
+    drop-shadow(
+      0 0 25px rgba(168, 85, 247, 0.65)
+    );
+
+  animation:
+    heartbeat 1.6s ease-in-out infinite;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.birthday h2 {
+  margin-bottom: 25px;
+
+  font-size: clamp(38px, 9vw, 64px);
+
+  line-height: 1;
+
+  letter-spacing: -2px;
 }
 
 .birthday p {
   max-width: 650px;
+
   margin: auto;
+
   color: var(--muted);
-  line-height: 1.9;
+
   font-size: 17px;
+
+  line-height: 2;
 }
 
-.heart {
-  font-size: 60px;
-  margin-bottom: 25px;
-  animation: pulse 1.5s ease-in-out infinite;
-}
+
+/* =========================
+   ANIMATIONS
+========================= */
 
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(35px);
+
+    transform:
+      translateY(40px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
+@keyframes heartbeat {
+  0%,
+  100% {
     transform: scale(1);
   }
 
@@ -178,41 +357,82 @@ button:hover {
   }
 }
 
-@keyframes floatGlow {
-  0%, 100% {
+@keyframes pulseGlow {
+  0%,
+  100% {
+    transform: scale(0.9);
+
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.1);
+
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
     transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-30px);
+    transform: translateY(-35px);
   }
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 600px) {
+
+  .hero {
+    padding: 25px;
+  }
+
   .small {
+    font-size: 9px;
+
     letter-spacing: 3px;
-    font-size: 10px;
   }
 
   h1 {
-    letter-spacing: -2px;
+    font-size: clamp(48px, 16vw, 72px);
+
+    letter-spacing: -3px;
   }
 
   .subtitle {
-    font-size: 16px;
+    font-size: 15px;
+
+    line-height: 1.7;
   }
 
   button {
-    padding: 15px 24px;
+    padding: 16px 25px;
   }
-}
 
-.birthday-video {
-  display: block;
-  width: 100%;
-  max-width: 650px;
-  margin: 0 auto 40px;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 20px 60px rgba(155, 77, 255, 0.25);
+  .birthday {
+    padding: 80px 20px;
+  }
+
+  .birthday-video {
+    border-radius: 20px;
+
+    margin-bottom: 45px;
+  }
+
+  .birthday h2 {
+    font-size: 38px;
+  }
+
+  .birthday p {
+    font-size: 15px;
+
+    line-height: 1.9;
+  }
 }
